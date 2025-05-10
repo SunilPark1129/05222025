@@ -1,0 +1,64 @@
+{
+  "todos": [
+    {
+      "id": "1",
+      "title": "learn about hooks",
+      "hasCompleted": true,
+      "lastUpdated": 1746917032310
+    },
+    {
+      "id": "2",
+      "title": "apply some style as you like",
+      "hasCompleted": false,
+      "lastUpdated": 1746916708789
+    },
+    {
+      "id": "3",
+      "title": "bind event handler for buttons",
+      "hasCompleted": false,
+      "lastUpdated": 1746916708789
+    },
+    {
+      "id": "4",
+      "title": "build three buttons for each todo task",
+      "hasCompleted": false,
+      "lastUpdated": 1746917013896
+    },
+    {
+      "id": "5",
+      "title": "Build two lists, pending and completed",
+      "hasCompleted": true,
+      "lastUpdated": 1746917043078
+    },
+    {
+      "id": "6",
+      "title": "give some thought about the data strcture",
+      "hasCompleted": true,
+      "lastUpdated": 1746917016437
+    },
+    {
+      "id": "7",
+      "title": "write clean coding",
+      "hasCompleted": true,
+      "lastUpdated": 1746917042712
+    },
+    {
+      "id": "8",
+      "title": "learn about algorithm",
+      "hasCompleted": false,
+      "lastUpdated": 1746917037992
+    },
+    {
+      "id": "9",
+      "title": "get to-do data from json server",
+      "hasCompleted": false,
+      "lastUpdated": 1746917014956
+    },
+    {
+      "id": "10",
+      "title": "functional first, stylish second",
+      "hasCompleted": false,
+      "lastUpdated": 1746917015268
+    }
+  ]
+}

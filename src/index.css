@@ -1,0 +1,37 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --clr-cool: #2a6fb5;
+  --clr-warm: #bd3617;
+  --clr-neutral: #568f55;
+  --clr-light: #dedbc0;
+  --clr-board: #eaeaea;
+  --clr-font-light: #292525;
+  --clr-font-strong: #221f1f;
+}
+
+body {
+  background-color: #f7f7f7;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.wrapper {
+  max-width: 1200px;
+  width: 100%;
+}
+
+@media (max-width: 900px) {
+  body {
+    font-size: 0.9rem;
+  }
+}

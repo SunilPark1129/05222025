@@ -1,0 +1,32 @@
+.todo__input-box {
+  display: flex;
+  gap: 0.5em;
+}
+
+.todo__input-box input {
+  flex-shrink: 0;
+  max-width: 200px;
+  width: 100%;
+  padding: 0.5em;
+  border-radius: 4px;
+  border: 1px solid rgb(207, 207, 207);
+  outline: none;
+  background-color: #f6f6f6;
+}
+
+.todo__input-box input:focus {
+  background-color: #fff;
+}
+
+.todo__input-box button {
+  cursor: pointer;
+  padding: 0.5em 0.75em;
+  background-color: var(--clr-cool);
+  border: none;
+  color: #fff;
+  border-radius: 4px;
+}
+
+.todo__input-box button:hover {
+  filter: brightness(120%);
+}

@@ -1,0 +1,41 @@
+.todo__btn {
+  border: none;
+  outline: none;
+  width: 4em;
+  height: 2.4em;
+  border-radius: 4px;
+  cursor: pointer;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.todo__btn svg {
+  pointer-events: none;
+}
+
+.todo__btn:hover {
+  filter: brightness(120%);
+}
+
+.todo__btn--edit {
+  background-color: var(--clr-cool);
+}
+
+.board__item--edit .todo__btn--edit {
+  filter: brightness(150%);
+}
+
+.todo__btn--remove {
+  background-color: var(--clr-warm);
+}
+
+.todo__btn--completed {
+  background-color: var(--clr-neutral);
+}
+
+.todo__btn--undo {
+  order: -1;
+  background-color: var(--clr-neutral);
+}
