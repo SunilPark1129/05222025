@@ -21,18 +21,18 @@ class Board extends Component {
     if (targetClass === "todo__btn--edit") {
       // if edit mode is not on -> return
       const sibling = e.target.previousSibling;
-      if (sibling.className !== "edit-active") return;
+      if (e.target.closest("li").classList[1] !== "board__item--edit") return;
 
       // if input is empty || didn't change -> return
       if (
-        sibling.children[0].value.trim() === "" ||
-        sibling.children[0].value === this.props.todos[targetIndex].title
+        sibling.value.trim() === "" ||
+        sibling.value === this.props.todos[targetIndex].title
       )
         return;
 
       const payload = {
         ...this.props.todos[targetIndex],
-        title: sibling.children[0].value,
+        title: sibling.value,
       };
       this.props.updateItem({ payload, index: targetIndex });
     } else if (targetClass === "todo__btn--remove") {

@@ -32,20 +32,17 @@ export class Todo extends Component {
   }
 
   render() {
+    const { isEditing, inputValue } = this.state;
     const { id, title, hasCompleted } = this.props.item;
+    const editMode = isEditing ? "board__item--edit" : "";
 
     return (
-      <li
-        className={`board__item ${this.state.isEditing && "board__item--edit"}`}
-        id={id}
-      >
-        <div className={this.state.isEditing ? "edit-active" : ""}>
-          {this.state.isEditing ? (
-            <input value={this.state.inputValue} onChange={this.handleChange} />
-          ) : (
-            <p>{title}</p>
-          )}
-        </div>
+      <li className={`board__item ${editMode}`} id={id}>
+        {isEditing ? (
+          <input value={inputValue} onChange={this.handleChange} />
+        ) : (
+          <p>{title}</p>
+        )}
         <EditButton onClick={this.handleEditClick} />
         <RemoveButton />
         {hasCompleted ? <UndoButton /> : <CompletedButton />}
