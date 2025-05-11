@@ -77,7 +77,6 @@ class App extends Component {
             <Board
               todos={this.state.todos}
               isLoading={this.state.isLoading}
-              editItem={this.editItem}
               updateItem={this.updateItem}
               deleteItem={this.deleteItem}
             />
