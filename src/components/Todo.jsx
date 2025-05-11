@@ -32,8 +32,8 @@ export class Todo extends Component {
   }
 
   // editing mode is on -> focus input
-  componentDidUpdate() {
-    if (this.state.isEditing) {
+  componentDidUpdate(prevProp, prevState) {
+    if (this.state.isEditing && prevState.isEditing !== this.state.isEditing) {
       this.inputRef.current.focus();
     }
   }
