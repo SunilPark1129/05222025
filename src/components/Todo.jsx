@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, createRef } from "react";
 import "./styles/todo.style.css";
 import {
   CompletedButton,
@@ -10,7 +10,7 @@ import {
 export class Todo extends Component {
   constructor(props) {
     super(props);
-
+    this.inputRef = createRef();
     this.handleChange = this.handleChange.bind(this);
     this.handleEditClick = this.handleEditClick.bind(this);
   }
@@ -31,6 +31,13 @@ export class Todo extends Component {
     this.setState({ inputValue: this.props.item.title });
   }
 
+  // editing mode is on -> focus input
+  componentDidUpdate() {
+    if (this.state.isEditing) {
+      this.inputRef.current.focus();
+    }
+  }
+
   render() {
     const { isEditing, inputValue } = this.state;
     const { id, title, hasCompleted } = this.props.item;
@@ -39,7 +46,11 @@ export class Todo extends Component {
     return (
       <li className={`board__item ${editMode}`} id={id}>
         {isEditing ? (
-          <input value={inputValue} onChange={this.handleChange} />
+          <input
+            value={inputValue}
+            ref={this.inputRef}
+            onChange={this.handleChange}
+          />
         ) : (
           <p>{title}</p>
         )}
