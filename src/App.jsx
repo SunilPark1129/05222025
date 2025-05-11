@@ -8,6 +8,7 @@ import {
   removeRequest,
   updateRequest,
 } from "./api/api";
+import Loading from "./components/Loading";
 
 class App extends Component {
   constructor() {
@@ -73,6 +74,7 @@ class App extends Component {
       <main>
         <div className="wrapper">
           <div className="todo__container">
+            {this.state.isLoading && <Loading />}
             <SubmitTask getInput={this.getInput} />
             <Board
               todos={this.state.todos}

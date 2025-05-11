@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import "./styles/board.style.css";
 import Todo from "./Todo";
-import Loading from "./Loading";
 
 class Board extends Component {
   constructor(props) {
@@ -60,15 +59,18 @@ class Board extends Component {
       if (!task.hasCompleted) pendingTasks.push(task);
       else completedTasks.push(task);
     }
+    const tasks = [
+      { task: pendingTasks, label: "Pending Tasks" },
+      { task: completedTasks, label: "Completed task" },
+    ];
 
     return (
-      <>
-        {this.props.isLoading && <Loading />}
-        <div className="board">
-          <section className="board__content">
-            <h2>Pending Tasks</h2>
+      <div className="board">
+        {tasks.map(({ task, label }) => (
+          <section key={label} className="board__content">
+            <h2>{label}</h2>
             <ul onClick={this.listClickHandle}>
-              {pendingTasks.map((item) => (
+              {task.map((item) => (
                 <Todo
                   key={item.id}
                   item={item}
@@ -77,21 +79,8 @@ class Board extends Component {
               ))}
             </ul>
           </section>
-
-          <section className="board__content">
-            <h2>Completed Tasks</h2>
-            <ul onClick={this.listClickHandle}>
-              {completedTasks.map((item) => (
-                <Todo
-                  key={item.id}
-                  item={item}
-                  updateHandlers={this.updateHandlers}
-                />
-              ))}
-            </ul>
-          </section>
-        </div>
-      </>
+        ))}
+      </div>
     );
   }
 }
