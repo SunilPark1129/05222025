@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import "./App.css";
 import Board from "./components/Board";
 import SubmitTask from "./components/SubmitTask";
@@ -10,83 +10,74 @@ import {
 } from "./api/api";
 import Loading from "./components/Loading";
 
-class App extends Component {
-  constructor() {
-    super();
-
-    this.state = {
-      todos: [],
-      isLoading: false,
-    };
-
-    this.getInput = this.getInput.bind(this);
-    this.updateItem = this.updateItem.bind(this);
-    this.deleteItem = this.deleteItem.bind(this);
-  }
+// requirement: useCallback is applied in this component
+function App() {
+  const [todos, setTodos] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [renderTrigger, setRenderTrigger] = useState(true);
 
   // -------------------------- HTTP Request -------------------------- //
-  componentDidMount() {
-    this.setState({ isLoading: true });
+  useEffect(() => {
+    setIsLoading(true);
     getRequest()
-      .then((data) => {
-        this.setState({ todos: data });
-        this.setState({ isLoading: false });
-      })
-      .catch((err) => console.log(err));
-  }
+      .then((data) => setTodos(data))
+      .catch((err) => console.log(err))
+      .finally(() => setIsLoading(false));
+  }, []);
 
-  getInput(value) {
+  const handleAddTodo = useCallback((value) => {
+    setIsLoading(true);
     const date = Date.now();
-    this.setState({ isLoading: true });
     const payload = { title: value, hasCompleted: false, lastUpdated: date };
 
     postRequest(payload)
-      .then((data) => {
-        this.setState((prev) => ({ todos: [data, ...prev.todos] }));
-        this.setState({ isLoading: false });
+      .then((data) => setTodos((prev) => [data, ...prev]))
+      .catch((err) => console.log(err))
+      .finally(() => setIsLoading(false));
+  }, []);
+
+  const updateItem = useCallback(({ payload, index }) => {
+    setIsLoading(true);
+    updateRequest(payload.id, payload)
+      .then(() => {
+        setTodos((prev) => {
+          const newTodos = [...prev];
+          newTodos[index] = payload;
+          return newTodos.sort((a, b) => b.lastUpdated - a.lastUpdated);
+        });
       })
-      .catch((err) => console.log(err));
-  }
+      .catch((err) => console.log(err))
+      .finally(() => setIsLoading(false));
+  }, []);
 
-  updateItem({ payload, index }) {
-    updateRequest(payload.id, payload).then(() => {
-      this.setState((prev) => {
-        const newTodos = [...prev.todos];
-        newTodos[index] = payload;
-        return {
-          todos: newTodos.sort((a, b) => b.lastUpdated - a.lastUpdated),
-        };
-      });
-    });
-  }
-
-  deleteItem(id) {
-    removeRequest(id).then(() => {
-      this.setState((prev) => ({
-        todos: prev.todos.filter((item) => item.id !== id),
-      }));
-    });
-  }
+  const deleteItem = useCallback((id) => {
+    setIsLoading(true);
+    removeRequest(id)
+      .then(() => setTodos((prev) => prev.filter((item) => item.id !== id)))
+      .catch((err) => console.log(err))
+      .finally(() => setIsLoading(false));
+  }, []);
   // ------------------------------------------------------------------- //
 
-  render() {
-    return (
-      <main>
-        <div className="wrapper">
-          <div className="todo__container">
-            {this.state.isLoading && <Loading />}
-            <SubmitTask getInput={this.getInput} />
-            <Board
-              todos={this.state.todos}
-              isLoading={this.state.isLoading}
-              updateItem={this.updateItem}
-              deleteItem={this.deleteItem}
-            />
-          </div>
+  return (
+    <main>
+      <div className="wrapper">
+        <div className="todo__container">
+          {isLoading && <Loading />}
+          <SubmitTask handleAddTodo={handleAddTodo} />
+          <Board
+            todos={todos}
+            updateItem={updateItem}
+            deleteItem={deleteItem}
+          />
         </div>
-      </main>
-    );
-  }
+        {/* this button triggers a re-render to test if useMemo arrays are being recalculated in the child component */}
+        <button onClick={() => setRenderTrigger((prev) => !prev)}>
+          Re-render trigger
+        </button>
+      </div>
+    </main>
+  );
 }
 
 export default App;
