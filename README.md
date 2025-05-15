@@ -2,7 +2,7 @@ todo list
 
 - install<br/>
 ```
-git clone https://github.com/SunilPark1129/05132025.git
+git clone https://github.com/SunilPark1129/05152025.git
 ```
 
 - install packages<br/>
