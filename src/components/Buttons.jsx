@@ -22,9 +22,9 @@ export function EditButton({ onClick }) {
   );
 }
 
-export function RemoveButton() {
+export function RemoveButton({ onClick }) {
   return (
-    <button className="todo__btn todo__btn--remove">
+    <button className="todo__btn todo__btn--remove" onClick={onClick}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="24"
@@ -47,9 +47,9 @@ export function RemoveButton() {
   );
 }
 
-export function CompletedButton() {
+export function CompletedButton({ onClick }) {
   return (
-    <button className="todo__btn todo__btn--completed">
+    <button className="todo__btn todo__btn--completed" onClick={onClick}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="24"
@@ -70,9 +70,9 @@ export function CompletedButton() {
   );
 }
 
-export function UndoButton() {
+export function UndoButton({ onClick }) {
   return (
-    <button className="todo__btn todo__btn--undo">
+    <button className="todo__btn todo__btn--undo" onClick={onClick}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="24"

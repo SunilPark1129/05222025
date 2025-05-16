@@ -4,7 +4,7 @@
       "id": "1",
       "title": "learn about hooks",
       "hasCompleted": true,
-      "lastUpdated": 1746917032310
+      "lastUpdated": 1747391992927
     },
     {
       "id": "2",
@@ -16,19 +16,19 @@
       "id": "3",
       "title": "bind event handler for buttons",
       "hasCompleted": false,
-      "lastUpdated": 1746916708789
+      "lastUpdated": 1746916708790
     },
     {
       "id": "4",
       "title": "build three buttons for each todo task",
-      "hasCompleted": false,
-      "lastUpdated": 1747197747339
+      "hasCompleted": true,
+      "lastUpdated": 1747392067954
     },
     {
       "id": "5",
       "title": "Build two lists, pending and completed",
-      "hasCompleted": true,
-      "lastUpdated": 1746917043078
+      "hasCompleted": false,
+      "lastUpdated": 1747392066082
     },
     {
       "id": "6",
@@ -39,14 +39,14 @@
     {
       "id": "7",
       "title": "write clean coding",
-      "hasCompleted": true,
-      "lastUpdated": 1746917042712
+      "hasCompleted": false,
+      "lastUpdated": 1747392076408
     },
     {
       "id": "8",
       "title": "learn about algorithm",
-      "hasCompleted": false,
-      "lastUpdated": 1747197817590
+      "hasCompleted": true,
+      "lastUpdated": 1747392071042
     },
     {
       "id": "9",
@@ -58,7 +58,7 @@
       "id": "10",
       "title": "functional first, stylish second",
       "hasCompleted": false,
-      "lastUpdated": 1747196396535
+      "lastUpdated": 1747392064755
     }
   ]
 }

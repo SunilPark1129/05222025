@@ -5,7 +5,7 @@ export async function getRequest() {
     const res = await fetch(BASE_URL);
     if (!res.ok) throw new Error("");
     const data = await res.json();
-    return data.sort((a, b) => b.lastUpdated - a.lastUpdated);
+    return data;
   } catch (err) {
     return Promise.reject(err);
   }

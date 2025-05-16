@@ -6,17 +6,16 @@ import {
   RemoveButton,
   UndoButton,
 } from "./Buttons";
+import useTodoActions from "../hooks/useTodoActions";
 
-// requirement: memo is applied in this component
-function Todo({ item: { title, id, hasCompleted } }) {
-  // test if this log appears when hasCompleted is updated
-  // -> it doesn't re-render sibling components because of React.memo
-  console.log(`Title: ${title}`);
-
+function Todo({ item, index }) {
+  const { title, id, hasCompleted } = item;
+  const { updateTodo, deleteTodo } = useTodoActions();
   const [isEditing, setIsEditing] = useState(false);
   const inputRef = useRef(null);
 
   useEffect(() => {
+    // inputRef -> focusing
     if (isEditing && inputRef.current) {
       // set initial input value
       inputRef.current.value = title;
@@ -24,9 +23,33 @@ function Todo({ item: { title, id, hasCompleted } }) {
     }
   }, [isEditing]);
 
+  // HTTP PATCH edit title
   function handleEditClick() {
+    if (isEditing) {
+      const { value } = inputRef.current;
+      if (value.trim() !== "" && value !== item.title) {
+        const payload = { ...item, title: value };
+        updateTodo(payload);
+      }
+    }
+
     // edit mode on|off
     setIsEditing((prev) => !prev);
+  }
+
+  // HTTP DELETE
+  function handleRemoveClick() {
+    deleteTodo(id);
+  }
+
+  // HTTP PATCH hasCompleted
+  function handleCompleteClick() {
+    const payload = {
+      ...item,
+      hasCompleted: !hasCompleted,
+      lastUpdated: Date.now(),
+    };
+    updateTodo(payload);
   }
 
   const editMode = isEditing ? "board__item--edit" : "";
@@ -35,10 +58,14 @@ function Todo({ item: { title, id, hasCompleted } }) {
     <li className={`board__item ${editMode}`} id={id}>
       {isEditing ? <input ref={inputRef} /> : <p>{title}</p>}
       <EditButton onClick={handleEditClick} />
-      <RemoveButton />
-      {hasCompleted ? <UndoButton /> : <CompletedButton />}
+      <RemoveButton onClick={handleRemoveClick} />
+      {hasCompleted ? (
+        <UndoButton onClick={handleCompleteClick} />
+      ) : (
+        <CompletedButton onClick={handleCompleteClick} />
+      )}
     </li>
   );
 }
 
-export default memo(Todo);
+export default Todo;
