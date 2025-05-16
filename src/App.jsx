@@ -6,7 +6,6 @@ import Loading from "./components/Loading";
 import { useTodoContext } from "./context/TodoContext";
 import useTodoActions from "./hooks/useTodoActions";
 
-// requirement: useCallback is applied in this component
 function App() {
   const { state } = useTodoContext();
   const { isLoading } = state;
