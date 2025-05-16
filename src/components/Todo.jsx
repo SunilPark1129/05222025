@@ -68,4 +68,4 @@ function Todo({ item }) {
   );
 }
 
-export default Todo;
+export default memo(Todo);

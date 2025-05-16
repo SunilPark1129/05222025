@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import "./App.css";
 import Board from "./components/Board";
 import SubmitTask from "./components/SubmitTask";
-import { getRequest } from "./api/api";
 import Loading from "./components/Loading";
 import { useTodoContext } from "./context/TodoContext";
 import useTodoActions from "./hooks/useTodoActions";
