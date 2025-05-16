@@ -8,7 +8,7 @@ import {
 } from "./Buttons";
 import useTodoActions from "../hooks/useTodoActions";
 
-function Todo({ item, index }) {
+function Todo({ item }) {
   const { title, id, hasCompleted } = item;
   const { updateTodo, deleteTodo } = useTodoActions();
   const [isEditing, setIsEditing] = useState(false);
@@ -33,7 +33,7 @@ function Todo({ item, index }) {
       }
     }
 
-    // edit mode on|off
+    // edit input title mode on|off
     setIsEditing((prev) => !prev);
   }
 

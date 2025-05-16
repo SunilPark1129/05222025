@@ -11,31 +11,19 @@ function Board() {
     const pendingTasks = todos.filter((item) => !item.hasCompleted);
     const completedTasks = todos.filter((item) => item.hasCompleted);
     return [
-      {
-        task: pendingTasks,
-        label: "Pending Tasks",
-        startIndex: 0,
-      },
-      {
-        task: completedTasks,
-        label: "Completed Tasks",
-        startIndex: pendingTasks.length,
-      },
+      { task: pendingTasks, label: "Pending Tasks" },
+      { task: completedTasks, label: "Completed Tasks" },
     ];
   }, [todos]);
 
   return (
     <div className="board">
-      {tasks.map(({ task, label, startIndex, length }) => (
+      {tasks.map(({ task, label }) => (
         <section key={label} className="board__content">
           <h2>{label}</h2>
           <ul>
-            {task.map((item, index) => (
-              <Todo
-                key={index + item.id}
-                item={item}
-                index={index + startIndex}
-              />
+            {task.map((item) => (
+              <Todo key={item.id} item={item} />
             ))}
           </ul>
         </section>
