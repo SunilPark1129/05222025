@@ -3,16 +3,16 @@ import "./App.css";
 import Board from "./components/Board";
 import SubmitTask from "./components/SubmitTask";
 import Loading from "./components/Loading";
-import { useTodoContext } from "./context/TodoContext";
-import useTodoActions from "./hooks/useTodoActions";
+import { fetchGetTodos } from "./features/todos/todosSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 function App() {
-  const { state } = useTodoContext();
-  const { isLoading } = state;
-  const { getTodos } = useTodoActions();
+  const dispatch = useDispatch();
+  const { isLoading } = useSelector((state) => state.todos);
 
+  // get initial todo list
   useEffect(() => {
-    getTodos();
+    dispatch(fetchGetTodos());
   }, []);
 
   return (

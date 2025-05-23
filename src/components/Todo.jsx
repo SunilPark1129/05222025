@@ -6,18 +6,18 @@ import {
   RemoveButton,
   UndoButton,
 } from "./Buttons";
-import useTodoActions from "../hooks/useTodoActions";
+import { fetchRemoveTodo, fetchUpdateTodo } from "../features/todos/todosSlice";
+import { useDispatch } from "react-redux";
 
 function Todo({ item }) {
+  const dispatch = useDispatch();
   const { title, id, hasCompleted } = item;
-  const { updateTodo, deleteTodo } = useTodoActions();
   const [isEditing, setIsEditing] = useState(false);
   const inputRef = useRef(null);
 
+  // when edit mode is on
   useEffect(() => {
-    // inputRef -> focusing
     if (isEditing && inputRef.current) {
-      // set initial input value
       inputRef.current.value = title;
       inputRef.current.focus();
     }
@@ -29,7 +29,7 @@ function Todo({ item }) {
       const { value } = inputRef.current;
       if (value.trim() !== "" && value !== item.title) {
         const payload = { ...item, title: value };
-        updateTodo(payload);
+        dispatch(fetchUpdateTodo(payload));
       }
     }
 
@@ -39,7 +39,7 @@ function Todo({ item }) {
 
   // HTTP DELETE
   function handleRemoveClick() {
-    deleteTodo(id);
+    dispatch(fetchRemoveTodo(id));
   }
 
   // HTTP PATCH hasCompleted
@@ -49,7 +49,7 @@ function Todo({ item }) {
       hasCompleted: !hasCompleted,
       lastUpdated: Date.now(),
     };
-    updateTodo(payload);
+    dispatch(fetchUpdateTodo(payload));
   }
 
   const editMode = isEditing ? "board__item--edit" : "";

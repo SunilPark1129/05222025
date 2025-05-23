@@ -3,7 +3,7 @@ const BASE_URL = "http://localhost:3000/todos";
 export async function getRequest() {
   try {
     const res = await fetch(BASE_URL);
-    if (!res.ok) throw new Error("");
+    if (!res.ok) throw new Error("error message: cannot get datas...");
     const data = await res.json();
     return data;
   } catch (err) {
@@ -20,7 +20,7 @@ export async function postRequest(payload) {
       },
       body: JSON.stringify(payload),
     });
-    if (!res.ok) throw new Error("");
+    if (!res.ok) throw new Error("error message: cannot post the data...");
     const data = await res.json();
     return data;
   } catch (err) {
@@ -33,7 +33,7 @@ export async function removeRequest(id) {
     const res = await fetch(`${BASE_URL}/${id}`, {
       method: "DELETE",
     });
-    if (!res.ok) throw new Error("");
+    if (!res.ok) throw new Error("error message: cannot remove the data...");
     const data = await res.json();
     return data;
   } catch (err) {
@@ -50,7 +50,7 @@ export async function updateRequest(id, payload) {
       },
       body: JSON.stringify(payload),
     });
-    if (!res.ok) throw new Error("");
+    if (!res.ok) throw new Error("error message: cannot update the data...");
     const data = await res.json();
     return data;
   } catch (err) {

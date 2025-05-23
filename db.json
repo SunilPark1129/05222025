@@ -27,8 +27,8 @@
     {
       "id": "5",
       "title": "Build two lists, pending and completed",
-      "hasCompleted": false,
-      "lastUpdated": 1747392753866
+      "hasCompleted": true,
+      "lastUpdated": 1748013704160
     },
     {
       "id": "6",
@@ -40,13 +40,13 @@
       "id": "7",
       "title": "write clean coding",
       "hasCompleted": false,
-      "lastUpdated": 1747392758040
+      "lastUpdated": 1748013708876
     },
     {
       "id": "8",
       "title": "learn about algorithm",
-      "hasCompleted": true,
-      "lastUpdated": 1747392215999
+      "hasCompleted": false,
+      "lastUpdated": 1748013706536
     },
     {
       "id": "9",

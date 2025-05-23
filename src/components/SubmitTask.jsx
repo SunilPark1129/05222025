@@ -1,9 +1,10 @@
 import React, { useRef } from "react";
 import "./styles/submitTask.style.css";
-import useTodoActions from "../hooks/useTodoActions";
+import { fetchCreateTodo } from "../features/todos/todosSlice";
+import { useDispatch } from "react-redux";
 
 function SubmitTask() {
-  const { addTodos } = useTodoActions();
+  const dispatch = useDispatch();
   const inputRef = useRef(null);
 
   const handleClick = () => {
@@ -12,7 +13,7 @@ function SubmitTask() {
     const date = Date.now();
     const payload = { title: value, hasCompleted: false, lastUpdated: date };
 
-    addTodos(payload);
+    dispatch(fetchCreateTodo(payload));
 
     inputRef.current.value = "";
   };

@@ -1,11 +1,10 @@
 import { useMemo } from "react";
 import "./styles/board.style.css";
 import Todo from "./Todo";
-import { useTodoContext } from "../context/TodoContext";
+import { useSelector } from "react-redux";
 
 function Board() {
-  const { state } = useTodoContext();
-  const { todos } = state;
+  const { todos } = useSelector((state) => state.todos);
 
   const tasks = useMemo(() => {
     const pendingTasks = todos.filter((item) => !item.hasCompleted);
